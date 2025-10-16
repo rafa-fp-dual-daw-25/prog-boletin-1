@@ -8,32 +8,18 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         //1
-        int a = 12, b = 3, c = 9;
+        int a = 12, b = 12, c = 12;
 
         if (a == b || b == c || a == c) {
             System.out.println("Hay numeros iguales");
         } else {
-            //***** OPCION OPTIMIZADA (CHAT GPT) *****
+            //***** OPCION OPTIMIZADA *****
             int menor = Math.min(a, Math.min(b, c));
             int mayor = Math.max(a, Math.max(b, c));
 
             System.out.println("El menor numero es: " + menor);
             System.out.println("El mayor numero es: " + mayor);
 
-            /*if (a < b && a < c) {
-                System.out.println("El menor numero es: " + a);
-            } else if (b < a && b < c) {
-                System.out.println("El menor numero es: " + b);
-            } else {
-                System.out.println("El menor numero es: " + c);
-            }
-            if (a > b && a > c) {
-                System.out.println("El mayor numero es: " + a);
-            } else if (b > a && b > c) {
-                System.out.println("El mayor numero es: " + b);
-            } else if (c > a && c > b) {
-                System.out.println("El mayor numero es: " + c);
-            }*/
         }
 
         //2
@@ -45,21 +31,40 @@ public class Main {
             }
             System.out.println();
         }
+        System.out.println();
 
         //3
-        /*do {
-            for (int i = 3; i >= 0; i--) {
-                System.out.print(" ");
-            }
-            multiplicador++;
-            System.out.println();
-        } while (multiplicador <= 10);
+        for (int i = 0; i < 4; i++) {
+            System.out.print(" ".repeat(3 - i));
+            System.out.println("*".repeat((2 * i) + 1));
+        }
+        for (int i = 0; i < 3; i++) {
+            System.out.print(" ".repeat(i + 1));
+            System.out.println("*".repeat(5 - (2 * i)));
+        }
+        System.out.println();
 
-        for (int i = 0; i <= 3; i++) {
-            for (int j = 1; j < i; j++) {
-                System.out.print(" ");
+        //4
+        for (int i = 0; i < 4; i++) {
+            System.out.print(" ".repeat(3 - i));
+            System.out.print("*");
+            if (i > 0) {
+                System.out.print(" ".repeat((2 * i) - 1));
+                System.out.println("*");
+            } else {
+                System.out.println();
             }
-        }*/
+        }
+        for (int i = 0; i < 3; i++) {
+            System.out.print(" ".repeat(i + 1));
+            System.out.print("*");
+            if (i < 2) {
+                System.out.print(" ".repeat(3 - (2 * i)));
+                System.out.println("*");
+            }
+        }
+
+        System.out.println("\n");
 
         //6
         int multiplicador = 1;
@@ -83,10 +88,38 @@ public class Main {
         } else {
             System.out.println("El valor " + valor + " es impar.");
         }
+        System.out.println();
 
         //8
-        String[] simbolosRomanos = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
-        int[] valoresDecimales = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        System.out.println(decimalToRomano(1982));
+        System.out.println();
 
+        //11
+        for (int i = 1; i <= 50; i++) {
+            System.out.print(i * 2 + " ");
+        }
+        System.out.println();
+
+        //12
+        for (int i = 1; i <= 100; i++) {
+            if (i % 5 == 0) continue;
+            System.out.print(i + " ");
+        }
+    }
+
+
+    public static String decimalToRomano(int numero) {
+        int[] valoresDecimales = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String[] simbolosRomanos = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        StringBuilder resultado = new StringBuilder();
+
+        for (int i = 0; i < valoresDecimales.length; i++) {
+            while (numero >= valoresDecimales[i]) {
+                numero -= valoresDecimales[i];
+                resultado.append(simbolosRomanos[i]);
+            }
+        }
+        return resultado.toString();
     }
 }
+
