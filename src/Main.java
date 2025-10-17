@@ -8,8 +8,60 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         //1
-        int a = 12, b = 12, c = 12;
+        int a = 10, b = 15, c = 20;
+        menorMayor(a, b, c);
+        System.out.println();
 
+        //2
+        figuraUno();
+        System.out.println();
+
+        //3
+        figuraDos();
+        System.out.println();
+
+        //4
+        figuraTres();
+        System.out.println("\n");
+
+        //5
+        System.out.println("Calcula tu número de la suerte: ");
+        System.out.println("Ingresa el día de nacimiento: ");
+        int dia = sc.nextInt();
+        System.out.println("Ingresa el mes de nacimiento: ");
+        int mes = sc.nextInt();
+        System.out.println("Ingresa el año de nacimiento (4 digitos): ");
+        int ano = sc.nextInt();
+
+        System.out.println("Tu número de la suerte es: " + luckNumber(dia, mes, ano) + "\n");
+
+        //6
+        tablas();
+        System.out.println();
+
+        //7
+        numeroRandom();
+
+        //8
+        System.out.println(decimalToRomano(1982));
+        System.out.println();
+
+        //9
+        esOmirp(941);
+
+        //10
+
+
+        //11
+        cincuentaPares();
+
+        //12
+        unoCienMenosMultCinco();
+
+        sc.close();
+    }
+
+    public static void menorMayor(int a, int b, int c) {
         if (a == b || b == c || a == c) {
             System.out.println("Hay numeros iguales");
         } else {
@@ -19,10 +71,11 @@ public class Main {
 
             System.out.println("El menor numero es: " + menor);
             System.out.println("El mayor numero es: " + mayor);
-
         }
+    }
 
-        //2
+    public static void figuraUno() {
+
         int filas = 5;
 
         for (int i = 1; i <= filas; i++) {
@@ -31,9 +84,10 @@ public class Main {
             }
             System.out.println();
         }
-        System.out.println();
+    }
 
-        //3
+    public static void figuraDos() {
+
         for (int i = 0; i < 4; i++) {
             System.out.print(" ".repeat(3 - i));
             System.out.println("*".repeat((2 * i) + 1));
@@ -42,9 +96,9 @@ public class Main {
             System.out.print(" ".repeat(i + 1));
             System.out.println("*".repeat(5 - (2 * i)));
         }
-        System.out.println();
+    }
 
-        //4
+    public static void figuraTres() {
         for (int i = 0; i < 4; i++) {
             System.out.print(" ".repeat(3 - i));
             System.out.print("*");
@@ -63,14 +117,37 @@ public class Main {
                 System.out.println("*");
             }
         }
+    }
 
-        System.out.println("\n");
+    public static int luckNumber(int dia, int mes, int ano) {
 
-        //6
+        int numeroSuerte = dia + mes + ano;
+
+        while (numeroSuerte > 9) {
+            int suma = 0;
+            String strNum = String.valueOf(numeroSuerte);
+
+            // *** EXPLICACIÓN DEL FOR ***
+            // Para cada carácter 'c' en el array de caracteres de strNum:
+            // - Convierte el carácter a su valor numérico real
+            // - Suma ese valor a la variable 'suma'
+            for (char c : strNum.toCharArray()) {
+                suma += Character.getNumericValue(c);
+            }
+
+            numeroSuerte = suma;
+
+        }
+
+        return numeroSuerte;
+    }
+
+    public static void tablas() {
         int multiplicador = 1;
         do {
-            System.out.println("Tabla del " + multiplicador);
-            System.out.println("*************");
+            System.out.println("=== Tabla del " + multiplicador + " ===");
+            System.out.println("--------------------");
+
             for (int i = 1; i <= 10; i++) {
                 System.out.println(multiplicador + " x " + i + " = " + (multiplicador * i));
             }
@@ -78,48 +155,97 @@ public class Main {
             multiplicador++;
             System.out.println();
         } while (multiplicador <= 10);
+    }
 
-        //7
+    public static void numeroRandom() {
         Random rnd = new Random();
         int valor = rnd.nextInt(101) + 100;
 
         if (valor % 2 == 0) {
-            System.out.println("El valor " + valor + " es par.");
+            System.out.println("El valor " + valor + " es par.\n");
         } else {
-            System.out.println("El valor " + valor + " es impar.");
-        }
-        System.out.println();
-
-        //8
-        System.out.println(decimalToRomano(1982));
-        System.out.println();
-
-        //11
-        for (int i = 1; i <= 50; i++) {
-            System.out.print(i * 2 + " ");
-        }
-        System.out.println();
-
-        //12
-        for (int i = 1; i <= 100; i++) {
-            if (i % 5 == 0) continue;
-            System.out.print(i + " ");
+            System.out.println("El valor " + valor + " es impar.\n");
         }
     }
 
-
-    public static String decimalToRomano(int numero) {
+    public static String decimalToRomano(int num) {
         int[] valoresDecimales = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
         String[] simbolosRomanos = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
         StringBuilder resultado = new StringBuilder();
 
         for (int i = 0; i < valoresDecimales.length; i++) {
-            while (numero >= valoresDecimales[i]) {
-                numero -= valoresDecimales[i];
+            while (num >= valoresDecimales[i]) {
+                num -= valoresDecimales[i];
                 resultado.append(simbolosRomanos[i]);
             }
         }
         return resultado.toString();
+    }
+
+    public static void esOmirp(int num) {
+        // Verificar si el número original es primo
+        boolean primoOriginal = true;
+        if (num <= 1) {
+            primoOriginal = false;
+        } else {
+            for (int i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i == 0) {
+                    primoOriginal = false;
+                    break;
+                }
+            }
+        }
+
+        if (!primoOriginal) {
+            System.out.println("El número normal " + num + " NO es primo.");
+            return;
+        }
+        System.out.println("El número normal " + num + " ES primo.");
+
+        // Invertir el número
+        String numStr = String.valueOf(num);
+        String numStrInvert = new StringBuilder(numStr).reverse().toString();
+        int numInvert = Integer.parseInt(numStrInvert);
+
+        // Verificar si el número invertido es primo
+        boolean primoInvertido = true;
+        if (numInvert <= 1) {
+            primoInvertido = false;
+        } else {
+            for (int i = 2; i <= Math.sqrt(numInvert); i++) {
+                if (numInvert % i == 0) {
+                    primoInvertido = false;
+                    break;
+                }
+            }
+        }
+
+        if (!primoInvertido) {
+            System.out.println("El número invertido " + numInvert + " NO es primo.");
+        } else {
+            System.out.println("El número invertido " + numInvert + " ES primo.");
+        }
+
+        // Resultado final
+        if (primoOriginal && primoInvertido && num != numInvert) {
+            System.out.println("¡El número " + num + " ES Omirp!\n");
+        } else {
+            System.out.println("El número " + num + " NO es Omirp.\n");
+        }
+    }
+
+    public static void cincuentaPares() {
+        for (int i = 1; i <= 50; i++) {
+            System.out.print(i * 2 + " ");
+        }
+        System.out.println("\n");
+    }
+
+    public static void unoCienMenosMultCinco() {
+        for (int i = 1; i <= 100; i++) {
+            if (i % 5 == 0) continue;
+            System.out.print(i + " ");
+        }
     }
 }
 
