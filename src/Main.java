@@ -56,7 +56,7 @@ public class Main {
         cincuentaPares();
 
         //12
-        unoCienMenosMultCinco();
+        imprimirSinMultiplosDe5();
 
         sc.close();
     }
@@ -234,6 +234,8 @@ public class Main {
         }
     }
 
+
+
     public static void cincuentaPares() {
         for (int i = 1; i <= 50; i++) {
             System.out.print(i * 2 + " ");
@@ -241,7 +243,7 @@ public class Main {
         System.out.println("\n");
     }
 
-    public static void unoCienMenosMultCinco() {
+    public static void imprimirSinMultiplosDe5() {
         for (int i = 1; i <= 100; i++) {
             if (i % 5 == 0) continue;
             System.out.print(i + " ");
